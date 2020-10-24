@@ -12,5 +12,11 @@
     <ProjectReference Include="..\LibreriaGenericos\LibreriaGenericos.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Archivos Compress\" />
+    <Folder Include="Archivos Decompress\" />
+    <Folder Include="Archivos Originales\" />
+  </ItemGroup>
+
 
 </Project>

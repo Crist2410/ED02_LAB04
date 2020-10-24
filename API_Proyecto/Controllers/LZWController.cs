@@ -25,7 +25,7 @@ namespace API_Proyecto.Controllers
         }
         void CargarHistorial()
         {
-            string Historial = Path.GetFullPath("DatosHuffman\\" + "Historial.txt");
+            string Historial = Path.GetFullPath("Datos LZW\\" + "Historial.txt");
             FileStream ArchivoHistotial = new FileStream(Historial, FileMode.OpenOrCreate);
             StreamReader reader = new StreamReader(ArchivoHistotial);
             string Texto = reader.ReadToEnd();
@@ -72,7 +72,7 @@ namespace API_Proyecto.Controllers
                 FileStream ArchivoOriginal = new FileStream(RutaOriginal, FileMode.OpenOrCreate);
                 file.CopyTo(ArchivoOriginal);
                 ArchivoOriginal.Close();
-                //Compresor.Comprimir(RutaOriginal, RutaCompresion);
+                Compresor.Comprimir(RutaOriginal, RutaCompresion);
                 FileInfo Original = new FileInfo(RutaOriginal);
                 FileInfo Comprimido = new FileInfo(RutaCompresion);
                 NuevoArchivo.NombreOriginal = file.FileName;
@@ -86,7 +86,7 @@ namespace API_Proyecto.Controllers
                     NuevoArchivo.PorcentajeReduccion = (double)NuevoArchivo.FactorCompresion * 100;
                     NuevoArchivo.RutaComprimido = Path.GetFullPath("Archivos Compress\\" + NuevoArchivo.NombreComprimido);
                     ListArchivos.Add(NuevoArchivo);
-                    string Historial = Path.GetFullPath("DatosHuffman\\" + "Historial.txt");
+                    string Historial = Path.GetFullPath("Datos LZW\\" + "Historial.txt");
                     StreamWriter writer = new StreamWriter(Historial, true);
                     string Texto = NuevoArchivo.NombreOriginal + "~" + Original.Length + "~" + NuevoArchivo.NombreComprimido + "~" + Comprimido.Length + "~";
                     writer.WriteLine(Texto);
@@ -114,7 +114,7 @@ namespace API_Proyecto.Controllers
                 ArchivoCompresion.Close();
                 string NombreOriginal = DicDecompress[file.FileName];
                 string RutaDescompresion = Path.GetFullPath("Archivos Decompress\\" + NombreOriginal);
-               // Compresor.Descomprimir(RutaCompresion, RutaDescompresion);
+                Compresor.Descomprimir(RutaCompresion, RutaDescompresion);
                 FileStream ArchivoFinal = new FileStream(RutaDescompresion, FileMode.Open);
                 FileStreamResult FileFinal = new FileStreamResult(ArchivoFinal, "text/txt");
                 return FileFinal;
